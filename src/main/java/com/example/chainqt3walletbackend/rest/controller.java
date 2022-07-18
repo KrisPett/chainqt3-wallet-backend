@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class controller {
-    BackendService backendService = new BFBackendService(Constants.BLOCKFROST_TESTNET_URL, "");
+    BackendService backendService = new BFBackendService(Constants.BLOCKFROST_TESTNET_URL, "dfr");
 
     @GetMapping("get")
     public String get(){
