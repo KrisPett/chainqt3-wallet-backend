@@ -1,16 +1,19 @@
 package com.example.chainqt3walletbackend.service;
 
 import com.example.chainqt3walletbackend.entity.AccountEntity;
+import com.example.chainqt3walletbackend.entity.DTOs.AccountDTO;
 import com.example.chainqt3walletbackend.repository.AccountRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
+import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -25,12 +28,12 @@ class WalletServiceTest {
     @Mock
     AccountRepository accountRepository;
 
-    private AccountEntity accountDummyData;
+    @Captor
+    ArgumentCaptor<AccountEntity> argumentCaptor;
 
     @BeforeEach
     void setUp() {
         walletService = new WalletService(accountRepository);
-        accountDummyData = new AccountEntity(null, null, null, null, null, null, null);
     }
 
     @AfterEach
@@ -39,16 +42,12 @@ class WalletServiceTest {
 
     @Test
     void createAccountSaveSuccess() {
-        when(accountRepository.save(any())).thenReturn(Mono.just(accountDummyData));
-        var account = walletService.createAccount().log();
+        when(accountRepository.save(any())).thenReturn(Mono.just(AccountEntity.create()));
+        walletService.createAccount().log().subscribe();
 
-        ArgumentCaptor<AccountEntity> accountEntityArgumentCaptor = ArgumentCaptor.forClass(AccountEntity.class);
+        verify(accountRepository).save(argumentCaptor.capture());
 
-        StepVerifier.create(account)
-                        .assertNext(accountEntity -> {
-                            verify(accountRepository).save(accountEntityArgumentCaptor.capture());
-                            assertEquals(accountEntity, accountDummyData);
-                        })
-                .verifyComplete();
+        assertTrue(argumentCaptor.getValue().getBaseAddress().startsWith("addr_"));
+        assertEquals(24, argumentCaptor.getValue().getMnemonic().split(" ").length);
     }
 }

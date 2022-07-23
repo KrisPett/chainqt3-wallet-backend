@@ -20,7 +20,8 @@ public class WalletService {
 
     public Mono<AccountEntity> createAccount() {
         Account newAccount = new Account(Networks.testnet());
-        return accountRepository.save(new AccountEntity(
+
+        return accountRepository.save(AccountEntity.create(
                 UUID.randomUUID().toString(),
                 newAccount.mnemonic(),
                 newAccount.privateKeyBytes(),
@@ -28,7 +29,6 @@ public class WalletService {
                 newAccount.changeAddress(),
                 newAccount.enterpriseAddress(),
                 newAccount.stakeAddress()));
-
     }
 
 }

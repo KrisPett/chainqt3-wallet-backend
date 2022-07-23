@@ -1,17 +1,15 @@
 package com.example.chainqt3walletbackend.entity;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Value;
+import lombok.NonNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor(staticName = "create")
+@NoArgsConstructor(staticName = "create")
 @Document("account")
 public class AccountEntity {
     @Id
@@ -23,3 +21,5 @@ public class AccountEntity {
     String enterpriseAddress;
     String stakeAddress;
 }
+
+
