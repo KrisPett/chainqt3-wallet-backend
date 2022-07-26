@@ -1,6 +1,5 @@
 package com.example.chainqt3walletbackend.rest;
 
-import com.example.chainqt3walletbackend.entity.DTOs.AccountDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,9 +23,9 @@ class WalletControllerTest {
                 .accept(MediaType.APPLICATION_JSON)
                 .exchange()
                 .expectStatus().isOk()
-                .expectBody(AccountDTO.class).value(accountDTO -> {
-                    assertTrue(accountDTO.getBaseAddress().startsWith("addr"));
-                    assertEquals(24, accountDTO.getMnemonic().split(" ").length);
+                .expectBody(WalletController.AccountDTO.class).value(accountDTO -> {
+                    assertTrue(accountDTO.baseAddress().startsWith("addr"));
+                    assertEquals(24, accountDTO.mnemonic().split(" ").length);
                 });
     }
 

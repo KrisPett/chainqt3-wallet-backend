@@ -46,4 +46,6 @@ class WalletServiceTest {
         assertTrue(argumentCaptor.getValue().getBaseAddress().startsWith("addr_"));
         assertEquals(24, argumentCaptor.getValue().getMnemonic().split(" ").length);
     }
+
+
 }
