@@ -1,4 +1,4 @@
-package com.example.chainqt3walletbackend.rest;
+package com.example.chainqt3walletbackend.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
