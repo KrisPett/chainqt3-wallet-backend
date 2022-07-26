@@ -12,13 +12,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document("account")
 public class AccountEntity {
     @Id
-    String id;
-    String mnemonic;
-    byte[] accountKey;
-    String baseAddress;
-    String changeAddress;
-    String enterpriseAddress;
-    String stakeAddress;
+    private String id;
+    private String mnemonic;
+    private byte[] accountKey;
+    private String baseAddress;
+    private String changeAddress;
+    private String enterpriseAddress;
+    private String stakeAddress;
 }
 
 

@@ -4,22 +4,19 @@ import com.bloxbean.cardano.client.account.Account;
 import com.bloxbean.cardano.client.common.model.Networks;
 import com.example.chainqt3walletbackend.entity.AccountEntity;
 import com.example.chainqt3walletbackend.repository.AccountRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class WalletService {
-    AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
 
     public Mono<AccountEntity> createAccount() {
         Account newAccount = new Account(Networks.testnet());
-
         return accountRepository.save(AccountEntity.create(
                 UUID.randomUUID().toString(),
                 newAccount.mnemonic(),
@@ -29,5 +26,4 @@ public class WalletService {
                 newAccount.enterpriseAddress(),
                 newAccount.stakeAddress()));
     }
-
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;
@@ -17,10 +18,10 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api")
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class WalletController {
     // BackendService backendService = new BFBackendService(Constants.BLOCKFROST_TESTNET_URL, "testnetvDFspA3OrpifwWMHZZVqwL6JIVdFYWIs");
-    WalletService walletService;
+    private final WalletService walletService;
 
     private final String MNEMONIC = "ramp all slice month wrong public analyst among blast ankle nephew busy cash spell brick purchase spare unhappy extend wrong drama grid kingdom aim";
 
